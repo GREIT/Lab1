@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Lab1</string>
+    <string name="hello">Hello!</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="email">Email</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>
