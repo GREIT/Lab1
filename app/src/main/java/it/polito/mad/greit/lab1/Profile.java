@@ -21,10 +21,10 @@ public class Profile {
     private static Profile instance;
 
     private Profile(){
-        instance.name = __NAME__;
-        instance.surname = __NAME__;
-        instance.email = __NAME__;
-        instance.pic = null;
+        this.name = __NAME__;
+        this.surname = __NAME__;
+        this.email = __NAME__;
+        this.pic = null;
     }
 
     public static Profile getInstance(){
@@ -69,10 +69,21 @@ public class Profile {
 
     public void setPic(Uri pic) {this.pic = pic;}
 
+    public void commit(SharedPreferences sp){
+        SharedPreferences.Editor e = sp.edit();
+        e.putString("name", getName());
+        e.putString("surname", getSurname());
+        e.putString("email", getEmail());
+        if(getPic() != null){
+            e.putString("pic", getPic().toString());
+        }
+        e.apply();
+    }
+
+
     private void loadFromDB(SharedPreferences sp){
 
-         //=
-        if(sp.contains("name")){
+        if(sp!= null && sp.contains("name")){
             setName(sp.getString("name",null));
             setSurname(sp.getString("surname",null));
             setEmail(sp.getString("email",null));

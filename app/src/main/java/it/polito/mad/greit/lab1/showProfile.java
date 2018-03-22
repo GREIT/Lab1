@@ -47,7 +47,7 @@ public class showProfile extends AppCompatActivity {
 
     private void Setup(){
 
-        profile = Profile.getInstance(getSharedPreferences("storage",MODE_PRIVATE)));
+        profile = Profile.getInstance(getSharedPreferences("storage",MODE_PRIVATE));
 
 
         TextView tv = findViewById(R.id.name);
