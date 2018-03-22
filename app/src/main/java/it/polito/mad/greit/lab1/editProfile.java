@@ -6,12 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class editProfile extends AppCompatActivity {
 
-    Info i;
+    Profile i;
     Button bb;
     Uri old_pic;
 
@@ -31,7 +30,7 @@ public class editProfile extends AppCompatActivity {
 
 
     void Setup(){
-        i = new Info();
+        i = new Profile();
         try {
             i.setName(getIntent().getStringExtra("name"));
             i.setSurname(getIntent().getStringExtra("surname"));
@@ -56,7 +55,7 @@ public class editProfile extends AppCompatActivity {
     }
 
     void SaveInfo(){
-        TextView tv = findViewById(R.id.edit_name);
+              TextView tv = findViewById(R.id.edit_name);
         i.setName(tv.getText().toString());
         tv = findViewById(R.id.edit_surname);
         i.setSurname(tv.getText().toString());
