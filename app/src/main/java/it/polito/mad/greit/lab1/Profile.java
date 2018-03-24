@@ -25,7 +25,7 @@ public class Profile {
   private String name;
   private String bio;
   private String email;
-  private String avatar;
+  private int avatar;
   
   public Profile(Context C) {
     this.context = C;
@@ -35,7 +35,7 @@ public class Profile {
       this.name = profileJSON.getString("name");
       this.bio = profileJSON.getString("bio");
       this.email = profileJSON.getString("email");
-      this.avatar = profileJSON.getString("avatar");
+      this.avatar = profileJSON.getInt("avatar");
     } catch (JSONException e) {
       e.printStackTrace();
     }
@@ -80,11 +80,11 @@ public class Profile {
     this.email = newEmail;
   }
   
-  public String getAvatar() {
+  public int getAvatar() {
     return avatar;
   }
   
-  public void setAvatar(String newAvatar) {
+  public void setAvatar(int newAvatar) {
     try {
       profileJSON.put("avatar", newAvatar);
     } catch (JSONException JE) {
@@ -101,7 +101,7 @@ public class Profile {
       J.put("name", "Default_Name");
       J.put("bio", "Default_Bio");
       J.put("email", "Default_Email");
-      J.put("avatar", "Default_Avatar");
+      J.put("avatar", R.mipmap.ic_launcher_round);
       outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
       outputStream.write(J.toString().getBytes());
       outputStream.close();
@@ -110,7 +110,7 @@ public class Profile {
     }
   }
   
-  private void saveProfileJSONOnFile() {
+  public void saveProfileJSONOnFile() {
     FileOutputStream outputStream;
     try {
       outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
@@ -144,7 +144,7 @@ public class Profile {
       createProfileJSON();
       Log.e("login activity", "ProfileJSON not found: " + e.toString());
     } catch (IOException e) {
-      Log.e("login activity", "Can not read ProfileJson: " + e.toString());
+      Log.e("login activity", "Can not read ProfileJSON: " + e.toString());
     }
   
     return json;

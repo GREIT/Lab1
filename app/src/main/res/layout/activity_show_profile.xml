@@ -11,12 +11,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:padding="10dp"
     android:background="#ffda79">
 
     <ImageView
-      android:id="@+id/showProfile_avatar"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:id="@+id/avatarImage_showProfile"
+      android:layout_width="150dp"
+      android:layout_height="150dp"
       app:srcCompat="@mipmap/ic_launcher_round"
       android:scaleType="fitXY"
       android:layout_gravity="center_horizontal"
@@ -24,14 +25,6 @@
       />
 
   </LinearLayout>
-
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:orientation="vertical"
-    android:background="#ff5252"
-    android:layout_weight="2"
-    android:layout_gravity="center">
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -64,7 +57,7 @@
           android:layout_marginLeft="15dp"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Carmine D'Amico" android:layout_marginStart="15dp" />
+          android:layout_marginStart="15dp" />
 
       </LinearLayout>
 
@@ -91,7 +84,7 @@
           android:layout_marginLeft="15dp"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="carmine920@gmail.com" android:layout_marginStart="15dp"/>
+          android:layout_marginStart="15dp"/>
 
       </LinearLayout>
 
@@ -118,12 +111,10 @@
           android:layout_marginLeft="15dp"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="carmine920@gmail.com" android:layout_marginStart="15dp"/>
+          android:layout_marginStart="15dp"/>
 
       </LinearLayout>
 
     </LinearLayout>
-
-  </LinearLayout>
 
 </LinearLayout>
