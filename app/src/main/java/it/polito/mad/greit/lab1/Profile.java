@@ -2,6 +2,7 @@ package it.polito.mad.greit.lab1;
 
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 
@@ -12,19 +13,23 @@ public class Profile {
     private String name;
     private String surname;
     private String email;
+    private String bio;
+   // private Bitmap bm;
     private Uri pic;
 
     private static final String __NAME__ = "Mario";
-    private static final String __SURNAME__ = "Mario";
-    private static final String __EMAIL__ = "Mario";
-    private static final String __BIO__ = "Mario";
+    private static final String __SURNAME__ = "Rossi";
+    private static final String __EMAIL__ = "mr@gmail.com";
+    private static final String __BIO__ = "bio here...";
     private static Profile instance;
 
     private Profile(){
         this.name = __NAME__;
-        this.surname = __NAME__;
-        this.email = __NAME__;
+        this.surname = __SURNAME__;
+        this.email = __EMAIL__;
+        this.bio = __BIO__;
         this.pic = null;
+        //this.bm = null;
     }
 
     public static Profile getInstance(){
@@ -68,6 +73,10 @@ public class Profile {
     public Uri getPic() {return pic;}
 
     public void setPic(Uri pic) {this.pic = pic;}
+
+   // public void setPic(Bitmap bm){this.bm = bm;}
+
+   // public Bitmap getPic() {return bm;}
 
     public void commit(SharedPreferences sp){
         SharedPreferences.Editor e = sp.edit();

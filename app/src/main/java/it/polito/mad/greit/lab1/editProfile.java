@@ -1,17 +1,30 @@
 package it.polito.mad.greit.lab1;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+
 public class editProfile extends AppCompatActivity {
 
+    static final int REQUEST_IMAGE_CAPTURE = 2;
+    static final int REQUEST_GALLERY = 1;
     Profile profile;
     Button bb;
+    Uri imguri;
 
     @Override
     protected void onCreate(Bundle b) {
@@ -25,6 +38,8 @@ public class editProfile extends AppCompatActivity {
         bb.setOnClickListener(view -> RevertInfo());
         bb = findViewById(R.id.edit_pic);
         bb.setOnClickListener(view -> UploadPic());
+        bb = findViewById(R.id.snap_pic);
+        bb.setOnClickListener(view -> Camera());
     }
 
 
@@ -67,17 +82,33 @@ public class editProfile extends AppCompatActivity {
 
 
     private void UploadPic(){
-            Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
+            Intent gallery = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             gallery.setType("image/*");
-            startActivityForResult(gallery,100);
+            gallery.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            //flags = gallery.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            startActivityForResult(gallery,REQUEST_GALLERY);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 100 && resultCode == RESULT_OK){
+        //getContentResolver().takePersistableUriPermission(data.getData(), flags);
+        if(requestCode == REQUEST_GALLERY && resultCode == RESULT_OK){
             profile.setPic(data.getData());
         }
+        else if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Log.d("mytag", data.getDataString());
+            profile.setPic(this.imguri);
+        }
+    }
+
+    void Camera(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        takePictureIntent.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        imguri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"pic.jpg"));
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,this.imguri);
+        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+
     }
 }

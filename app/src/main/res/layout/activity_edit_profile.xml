@@ -24,6 +24,17 @@
         android:text="Upload Pic"
         android:layout_margin="16dp"
         android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        />
+
+    <Button
+        android:id="@+id/snap_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Snap Pic"
+        android:layout_margin="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
         />
 
     <EditText
@@ -34,6 +45,7 @@
         android:inputType="textPersonName"
         android:text="Name"
         android:layout_margin="16dp"
+        android:layout_weight="1"
         />
 
     <EditText
@@ -44,6 +56,7 @@
         android:inputType="textPersonName"
         android:text="Surname"
         android:layout_margin="16dp"
+        android:layout_weight="1"
         />
 
     <EditText
@@ -53,6 +66,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:layout_margin="16dp"
+        android:layout_weight="1"
         />
 
     <Button
@@ -61,7 +75,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_gravity="center_horizontal"
-        android:text="Apply" />
+        android:text="Apply"
+        android:layout_weight="1"/>
 
     <Button
         android:id="@+id/revert"
@@ -69,6 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_gravity="center_horizontal"
-        android:text="Revert" />
+        android:text="Revert"
+        android:layout_weight="1"/>
 
 </LinearLayout>
