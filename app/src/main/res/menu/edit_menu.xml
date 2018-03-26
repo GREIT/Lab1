@@ -5,10 +5,10 @@
     tools:context=".showProfile">
 
     <item
-        android:id="@+id/edit"
+        android:id="@+id/confirm"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_mode_edit_black_24dp"
-        android:title="edit"
-        app:showAsAction="always" />
+        android:title="confirm"
+        android:icon="@drawable/ic_mode_confirm_white_48dp"
+        app:showAsAction="always"/>
 
 </menu>
