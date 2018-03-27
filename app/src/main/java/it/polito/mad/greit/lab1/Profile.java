@@ -1,128 +1,225 @@
 package it.polito.mad.greit.lab1;
 
 
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class Profile {
 
+    private Context context;
+    private JSONObject profileJSON;
     private String name;
     private String surname;
     private String nickname;
-    private String email;
     private String location;
     private String bio;
+    private String email;
     private Uri pic;
 
+    private static Profile instance;
+  
     private static final String __NAME__ = "Mario";
     private static final String __SURNAME__ = "Rossi";
     private static final String __NICKNAME__ = "@mariorossi";
     private static final String __EMAIL__ = "mr@gmail.com";
     private static final String __LOCATION__ = "Turin, Italy";
     private static final String __BIO__ = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis.";
-    private static Profile instance;
+    
 
-    private Profile(){
-        this.name = __NAME__;
-        this.surname = __SURNAME__;
-        this.nickname = __NICKNAME__;
-        this.email = __EMAIL__;
-        this.location = __LOCATION__;
-        this.bio = __BIO__;
-        this.pic = null;
+    private Profile(Context C) {
+      this.context = C;
+
+      try {
+        this.profileJSON = new JSONObject(loadJSONFromFile());
+        this.name = profileJSON.getString("name");
+        this.surname = profileJSON.getString("surname");
+        this.nickname = profileJSON.getString("nickname");
+        this.location = profileJSON.getString("location");
+        this.bio = profileJSON.getString("bio");
+        this.email = profileJSON.getString("email");
+        this.pic = Uri.parse(profileJSON.getString("pic"));
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
     }
 
     public static Profile getInstance(){
-        if (instance != null){
-            instance = new Profile();
+        if (instance == null){
+            return null; //to raise an exception here
         }
         return instance;
     }
 
-    public static Profile getInstance(SharedPreferences sp){
+    public static Profile getInstance(Context c){
         if (instance == null){
-            instance = new Profile();
+            instance = new Profile(c);
             instance.loadFromDB(sp);
         }
         return instance;
     }
 
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String newName) {
+    try {
+      profileJSON.put("name", newName);
+    } catch (JSONException JE) {
+      JE.printStackTrace();
     }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    this.name = newName;
+  }
+  
+  public String getSurname() {
+    return surname;
+  }
+  
+  public void setSurname(String newSurname) {
+    try {
+      profileJSON.put("surname", newSurname);
+    } catch (JSONException JE) {
+      JE.printStackTrace();
     }
-
-    public void setEmail(String email) {
-        this.email = email;
+    this.surname = newSurname;
+  }
+  
+  public String getNickname() {
+    return nickname;
+  }
+  
+  public void setNickname(String newNickname) {
+    try {
+      profileJSON.put("nickname", newNickname);
+    } catch (JSONException JE) {
+      JE.printStackTrace();
     }
-
-    public String getName() {
-        return name;
+    this.nickname = newNickname;
+  }
+  
+  public String getLocation() {
+    return location;
+  }
+  
+  public void setLocation(String newLocation) {
+    try {
+      profileJSON.put("location", newLocation);
+    } catch (JSONException JE) {
+      JE.printStackTrace();
     }
-
-    public String getSurname() {return surname;}
-
-    public String getEmail() {
-        return email;
+    this.location = newLocation;
+  }
+  
+  public String getBio() {
+    return bio;
+  }
+  
+  public void setBio(String newBio) {
+    try {
+      profileJSON.put("bio", newBio);
+    } catch (JSONException JE) {
+      JE.printStackTrace();
     }
+    this.bio = newBio;
+  }
+  
+  public String getEmail() {
+    return email;
+  }
+  
+  public void setEmail(String newEmail) {
+    try {
+      profileJSON.put("email", newEmail);
+    } catch (JSONException JE) {
+      JE.printStackTrace();
+    }
+    this.email = newEmail;
+  }
+  
+  public Uri getPic() {
+    return pic;
+  }
 
-    public Uri getPic() {return pic;}
-
-    public void setPic(Uri pic) {this.pic = pic;}
-
-    public String getNickname() { return nickname; }
-
-    public void setNickname(String nickname) { this.nickname = nickname; }
-
-    public String getLocation() { return location; }
-
-    public void setLocation(String location) { this.location = location; }
-
-    public String getBio() { return bio; }
-
-    public void setBio(String bio) { this.bio = bio; }
-
-
-    public void commit(SharedPreferences sp){
-        SharedPreferences.Editor e = sp.edit();
-        e.putString("name", getName());
-        e.putString("surname", getSurname());
-        e.putString("nickname", getNickname());
-        e.putString("email", getEmail());
-        e.putString("location", getLocation());
-        e.putString("bio", getBio());
-
-        if(getPic() != null){
-            e.putString("pic", getPic().toString());
+     public void setPic(Uri newAvatar) {
+    try {
+      profileJSON.put("pic", newAvatar.toString());
+    } catch (JSONException JE) {
+      JE.printStackTrace();
+    }
+    this.pic = newAvatar;
+  }
+  
+  public void createDefaultProfileJSON() {
+    FileOutputStream outputStream;
+    
+    try {
+      JSONObject J = new JSONObject();
+      J.put("name", "Default_Name");
+      J.put("bio", "Default_Bio");
+      J.put("email", "Default_Email");
+      J.put("surname", "Default_Surname");
+      J.put("nickname", "Default_Nickname");
+      J.put("location", "Default_location");
+      J.put("pic", null);
+      outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
+      outputStream.write(J.toString().getBytes());
+      outputStream.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  
+  public void saveProfileJSONOnFile() {
+    FileOutputStream outputStream;
+    try {
+      outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
+      outputStream.write(profileJSON.toString().getBytes());
+      outputStream.close();
+    } catch (Exception E) {
+      E.printStackTrace();
+    }
+  }
+  
+  private String loadJSONFromFile() {
+    String json = "";
+    
+    try {
+      
+      InputStream inputStream =  context.openFileInput("profile.json");
+      if ( inputStream != null ) {
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String receiveString = "";
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        while ( (receiveString = bufferedReader.readLine()) != null ) {
+          stringBuilder.append(receiveString);
         }
-        e.apply();
+        
+        inputStream.close();
+        json = stringBuilder.toString();
+      }
     }
+    catch (FileNotFoundException e) {
+      createDefaultProfileJSON();
+      Log.e("login activity", "ProfileJSON not found: " + e.toString());
+    } catch (IOException e) {
+      Log.e("login activity", "Can not read ProfileJSON: " + e.toString());
+    }
+    
+    return json;
+  }
 
-
-    private void loadFromDB(SharedPreferences sp){
-
-        if(sp!= null && sp.contains("name")){
-            setName(sp.getString("name",null));
-            setSurname(sp.getString("surname",null));
-            setNickname(sp.getString("nickname", null));
-            setEmail(sp.getString("email",null));
-            setLocation(sp.getString("location", null));
-            setBio(sp.getString("bio", null));
-
-            if(sp.getString("pic",null) != null) {
-                Log.d("pic", "Setup: pic isn't null");
-                setPic(Uri.parse(sp.getString("pic", null)));
-            }
-        }
 
     }
-
 }
