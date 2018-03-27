@@ -25,7 +25,7 @@ public class showProfile extends AppCompatActivity {
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_show_profile);
-        t = findViewById(R.id.toolbar);
+        t = findViewById(R.id.show_toolbar);
         setSupportActionBar(t);
         Setup();
     }
@@ -33,7 +33,7 @@ public class showProfile extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.show_menu, menu);
         return true;
     }
 

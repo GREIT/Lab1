@@ -14,7 +14,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,6 +32,8 @@ public class editProfile extends AppCompatActivity {
     static final int CAMERA_PERMISSION = 3;
     static final int REQUEST_IMAGE_CAPTURE = 2;
     static final int REQUEST_GALLERY = 1;
+
+    Toolbar t;
     Profile profile;
     Button bb;
     Uri photo;
@@ -35,17 +41,34 @@ public class editProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
-        Setup();
         setContentView(R.layout.activity_edit_profile);
+        t = findViewById(R.id.edit_toolbar);
+        setSupportActionBar(t);
+        Setup();
         Fill();
-        bb = findViewById(R.id.apply);
-        bb.setOnClickListener(view -> SaveInfo());
+
         bb = findViewById(R.id.revert);
         bb.setOnClickListener(view -> RevertInfo());
         bb = findViewById(R.id.edit_pic);
         bb.setOnClickListener(view -> UploadPic());
-        bb = findViewById(R.id.snap_pic);
-        bb.setOnClickListener(view -> Camera());
+/*        bb = findViewById(R.id.snap_pic);
+        bb.setOnClickListener(view -> Camera());*/
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.edit_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (R.id.edit == item.getItemId()) {
+            SaveInfo();
+            return true;
+        } else return super.onOptionsItemSelected(item);
     }
 
 
