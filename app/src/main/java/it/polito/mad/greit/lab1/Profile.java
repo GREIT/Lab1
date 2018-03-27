@@ -1,5 +1,6 @@
 package it.polito.mad.greit.lab1;
 
+
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
@@ -16,43 +17,62 @@ import java.io.InputStreamReader;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by Carmine on 21/03/2018.
- */
-
 public class Profile {
-  private Context context;
-  private JSONObject profileJSON;
-  private String name;
-  private String surname;
-  private String nickname;
-  private String location;
-  private String bio;
-  private String email;
-  private Uri avatar;
+
+    private Context context;
+    private JSONObject profileJSON;
+    private String name;
+    private String surname;
+    private String nickname;
+    private String location;
+    private String bio;
+    private String email;
+    private Uri pic;
+
+    private static Profile instance;
   
-  public Profile(Context C) {
-    this.context = C;
+    private static final String __NAME__ = "Mario";
+    private static final String __SURNAME__ = "Rossi";
+    private static final String __NICKNAME__ = "@mariorossi";
+    private static final String __EMAIL__ = "mr@gmail.com";
+    private static final String __LOCATION__ = "Turin, Italy";
+    private static final String __BIO__ = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis.";
     
-    try {
-      this.profileJSON = new JSONObject(loadJSONFromFile());
-      this.name = profileJSON.getString("name");
-      this.surname = profileJSON.getString("surname");
-      this.nickname = profileJSON.getString("nickname");
-      this.location = profileJSON.getString("location");
-      this.bio = profileJSON.getString("bio");
-      this.email = profileJSON.getString("email");
-      this.avatar = Uri.parse(profileJSON.getString("avatar"));
-    } catch (JSONException e) {
-      e.printStackTrace();
+
+    private Profile(Context C) {
+      this.context = C;
+
+      try {
+        this.profileJSON = new JSONObject(loadJSONFromFile());
+        this.name = profileJSON.getString("name");
+        this.surname = profileJSON.getString("surname");
+        this.nickname = profileJSON.getString("nickname");
+        this.location = profileJSON.getString("location");
+        this.bio = profileJSON.getString("bio");
+        this.email = profileJSON.getString("email");
+        this.pic = Uri.parse(profileJSON.getString("pic"));
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
     }
-  }
-  
-  public String getName() {
-    return name;
-  }
-  
-  public void setName(String newName) {
+
+    public static Profile getInstance(){
+        if (instance == null){
+            return null; //to raise an exception here
+        }
+        return instance;
+    }
+
+    public static Profile getInstance(Context c){
+        if (instance == null){
+            instance = new Profile(c);
+            instance.loadFromDB(sp);
+        }
+        return instance;
+    }
+
+
+    public void setName(String newName) {
     try {
       profileJSON.put("name", newName);
     } catch (JSONException JE) {
@@ -126,17 +146,17 @@ public class Profile {
     this.email = newEmail;
   }
   
-  public Uri getAvatar() {
-    return avatar;
+  public Uri getPic() {
+    return pic;
   }
-  
-  public void setAvatar(Uri newAvatar) {
+
+     public void setPic(Uri newAvatar) {
     try {
-      profileJSON.put("avatar", newAvatar.toString());
+      profileJSON.put("pic", newAvatar.toString());
     } catch (JSONException JE) {
       JE.printStackTrace();
     }
-    this.avatar = newAvatar;
+    this.pic = newAvatar;
   }
   
   public void createDefaultProfileJSON() {
@@ -150,7 +170,7 @@ public class Profile {
       J.put("surname", "Default_Surname");
       J.put("nickname", "Default_Nickname");
       J.put("location", "Default_location");
-      J.put("avatar", null);
+      J.put("pic", null);
       outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
       outputStream.write(J.toString().getBytes());
       outputStream.close();
@@ -199,4 +219,7 @@ public class Profile {
     
     return json;
   }
+
+
+    }
 }
