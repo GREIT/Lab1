@@ -93,7 +93,7 @@ public class Profile {
     this.avatar = newAvatar;
   }
   
-  private void createProfileJSON() {
+  public void createDefaultProfileJSON() {
     FileOutputStream outputStream;
     
     try {
@@ -125,6 +125,7 @@ public class Profile {
     String json = "";
     
     try {
+      
       InputStream inputStream =  context.openFileInput("profile.json");
       if ( inputStream != null ) {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -141,7 +142,7 @@ public class Profile {
       }
     }
     catch (FileNotFoundException e) {
-      createProfileJSON();
+      createDefaultProfileJSON();
       Log.e("login activity", "ProfileJSON not found: " + e.toString());
     } catch (IOException e) {
       Log.e("login activity", "Can not read ProfileJSON: " + e.toString());
