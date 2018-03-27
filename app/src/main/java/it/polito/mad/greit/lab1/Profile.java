@@ -31,34 +31,34 @@ public class Profile {
 
     private static Profile instance;
   
-    /*private static final String __NAME__ = "Mario";
+    private static final String __NAME__ = "Mario";
     private static final String __SURNAME__ = "Rossi";
     private static final String __NICKNAME__ = "@mariorossi";
     private static final String __EMAIL__ = "mr@gmail.com";
     private static final String __LOCATION__ = "Turin, Italy";
     private static final String __BIO__ = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis.";
-    */
+
 
     private Profile(Context C) {
       this.context = C;
 
       try {
-        this.profileJSON = new JSONObject(loadJSONFromFile());
-        this.name = profileJSON.getString("name");
-        this.surname = profileJSON.getString("surname");
-        this.nickname = profileJSON.getString("nickname");
-        this.location = profileJSON.getString("location");
-        this.bio = profileJSON.getString("bio");
-        this.email = profileJSON.getString("email");
-        this.pic = Uri.parse(profileJSON.getString("pic"));
+          this.profileJSON = new JSONObject(loadJSONFromFile());
+          this.name = profileJSON.getString("name");
+          this.surname = profileJSON.getString("surname");
+          this.nickname = profileJSON.getString("nickname");
+          this.location = profileJSON.getString("location");
+          this.bio = profileJSON.getString("bio");
+          this.email = profileJSON.getString("email");
+          this.pic = Uri.parse(profileJSON.getString("pic"));
       } catch (JSONException e) {
-        e.printStackTrace();
+          e.printStackTrace();
       }
     }
 
     public static Profile getInstance(){
         if (instance == null){
-            return null; //to raise an exception here
+            return null;
         }
         return instance;
     }
@@ -76,9 +76,9 @@ public class Profile {
 
     public void setName(String newName) {
         try {
-          profileJSON.put("name", newName);
+            profileJSON.put("name", newName);
         } catch (JSONException JE) {
-          JE.printStackTrace();
+            JE.printStackTrace();
         }
         this.name = newName;
     }
@@ -89,9 +89,9 @@ public class Profile {
   
     public void setSurname(String newSurname) {
         try {
-          profileJSON.put("surname", newSurname);
+            profileJSON.put("surname", newSurname);
         } catch (JSONException JE) {
-          JE.printStackTrace();
+            JE.printStackTrace();
         }
         this.surname = newSurname;
     }
@@ -102,9 +102,9 @@ public class Profile {
   
     public void setNickname(String newNickname) {
         try {
-          profileJSON.put("nickname", newNickname);
+            profileJSON.put("nickname", newNickname);
         } catch (JSONException JE) {
-          JE.printStackTrace();
+            JE.printStackTrace();
         }
         this.nickname = newNickname;
     }
@@ -129,9 +129,9 @@ public class Profile {
   
     public void setBio(String newBio) {
         try {
-          profileJSON.put("bio", newBio);
+            profileJSON.put("bio", newBio);
         } catch (JSONException JE) {
-          JE.printStackTrace();
+            JE.printStackTrace();
         }
         this.bio = newBio;
     }
@@ -142,9 +142,9 @@ public class Profile {
 
     public void setEmail(String newEmail) {
         try {
-          profileJSON.put("email", newEmail);
+            profileJSON.put("email", newEmail);
         } catch (JSONException JE) {
-          JE.printStackTrace();
+            JE.printStackTrace();
         }
         this.email = newEmail;
     }
@@ -155,42 +155,43 @@ public class Profile {
 
     public void setPic(Uri newAvatar) {
         try {
-          profileJSON.put("pic", newAvatar.toString());
+            profileJSON.put("pic", newAvatar.toString());
         } catch (JSONException JE) {
-          JE.printStackTrace();
+            JE.printStackTrace();
         }
         this.pic = newAvatar;
     }
 
-    public void createDefaultProfileJSON() {
-
+    private void createDefaultProfileJSON() {
         FileOutputStream outputStream;
 
         try {
-          JSONObject J = new JSONObject();
-          J.put("name", "Default_Name");
-          J.put("bio", "Default_Bio");
-          J.put("email", "Default_Email");
-          J.put("surname", "Default_Surname");
-          J.put("nickname", "Default_Nickname");
-          J.put("location", "Default_location");
-          J.put("pic", null);
-          outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
-          outputStream.write(J.toString().getBytes());
-          outputStream.close();
+            JSONObject J = new JSONObject();
+            J.put("name", __NAME__);
+            J.put("surname", __SURNAME__);
+            J.put("nickname", __NICKNAME__);
+            J.put("email", __EMAIL__);
+            J.put("location", __LOCATION__);
+            J.put("bio", __BIO__);
+            J.put("pic", null);
+
+            outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
+            outputStream.write(J.toString().getBytes());
+            outputStream.close();
         } catch (Exception e) {
-          e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
     public void saveProfileJSONOnFile() {
         FileOutputStream outputStream;
+
         try {
-          outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
-          outputStream.write(profileJSON.toString().getBytes());
-          outputStream.close();
+            outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
+            outputStream.write(profileJSON.toString().getBytes());
+            outputStream.close();
         } catch (Exception E) {
-          E.printStackTrace();
+            E.printStackTrace();
         }
     }
   
@@ -198,31 +199,28 @@ public class Profile {
         String json = "";
 
         try {
+            InputStream inputStream =  context.openFileInput("profile.json");
 
-          InputStream inputStream =  context.openFileInput("profile.json");
-          if ( inputStream != null ) {
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String receiveString = "";
-            StringBuilder stringBuilder = new StringBuilder();
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
 
-            while ( (receiveString = bufferedReader.readLine()) != null ) {
-              stringBuilder.append(receiveString);
+                while ( (receiveString = bufferedReader.readLine()) != null )
+                    stringBuilder.append(receiveString);
+
+                inputStream.close();
+                json = stringBuilder.toString();
             }
-
-            inputStream.close();
-            json = stringBuilder.toString();
-          }
         }
         catch (FileNotFoundException e) {
-          createDefaultProfileJSON();
-          Log.e("login activity", "ProfileJSON not found: " + e.toString());
+            createDefaultProfileJSON();
+            Log.e("login activity", "ProfileJSON not found: " + e.toString());
         } catch (IOException e) {
-          Log.e("login activity", "Can not read ProfileJSON: " + e.toString());
+            Log.e("login activity", "Can not read ProfileJSON: " + e.toString());
         }
 
         return json;
     }
-
-
 }

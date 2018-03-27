@@ -78,7 +78,6 @@ public class showProfile extends AppCompatActivity {
             ImageView iw = findViewById(R.id.pic);
             iw.setImageResource(R.mipmap.ic_launcher);
         }
-
     }
 
     @Override
