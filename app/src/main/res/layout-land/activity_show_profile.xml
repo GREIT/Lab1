@@ -85,89 +85,95 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ScrollView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="30dp" >
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="10dp">
+                android:orientation="vertical"
+                android:padding="30dp" >
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_email_black_24dp"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_gravity="top"
-                    android:layout_marginRight="40dp"/>
-
-                <TextView
-                    android:id="@+id/email"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="Email"
-                    android:text="mario@rossi.com"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="10dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_email_black_24dp"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_gravity="top"
+                        android:layout_marginRight="40dp"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_place_black_24dp"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_gravity="top"
-                    android:layout_marginRight="40dp"/>
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="Email"
+                        android:text="mario@rossi.com"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/location"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="Location"
-                    android:text="Turin, Italy"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_place_black_24dp"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_gravity="top"
+                        android:layout_marginRight="40dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="10dp">
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="Location"
+                        android:text="Turin, Italy"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_description_black_24dp"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_gravity="top"
-                    android:layout_marginRight="40dp"/>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/biography"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="Location"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis."
-                    android:textColor="@color/colorPrimaryText"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_description_black_24dp"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_gravity="top"
+                        android:layout_marginRight="40dp"/>
+
+                    <TextView
+                        android:id="@+id/biography"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="Location"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis."
+                        android:textColor="@color/colorPrimaryText"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                </LinearLayout>
 
             </LinearLayout>
-
-        </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

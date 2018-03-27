@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -42,17 +43,20 @@ public class editProfile extends AppCompatActivity {
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_edit_profile);
+
         t = findViewById(R.id.edit_toolbar);
         setSupportActionBar(t);
+        t.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        t.setNavigationOnClickListener(view -> RevertInfo());
+
         Setup();
         Fill();
 
-        bb = findViewById(R.id.revert);
-        bb.setOnClickListener(view -> RevertInfo());
         bb = findViewById(R.id.edit_pic);
         bb.setOnClickListener(view -> UploadPic());
         bb = findViewById(R.id.snap_pic);
         bb.setOnClickListener(view -> Camera());
+
     }
 
     @Override
