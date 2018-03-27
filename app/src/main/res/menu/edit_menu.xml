@@ -8,7 +8,8 @@
         android:id="@+id/confirm"
         android:orderInCategory="100"
         android:title="confirm"
-        android:icon="@drawable/ic_mode_confirm_white_48dp"
+        android:icon="@drawable/ic_check_black_24dp"
+        android:iconTint="#FFFFFF"
         app:showAsAction="always"/>
 
 </menu>

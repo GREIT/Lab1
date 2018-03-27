@@ -7,7 +7,8 @@
     <item
         android:id="@+id/edit"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_mode_edit_white_24dp"
+        android:icon="@drawable/ic_edit_black_24dp"
+        android:iconTint="#FFFFFF"
         android:title="edit"
         app:showAsAction="always" />
 
