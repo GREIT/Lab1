@@ -1,6 +1,7 @@
 package it.polito.mad.greit.lab1;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -23,9 +24,12 @@ public class Profile {
   private Context context;
   private JSONObject profileJSON;
   private String name;
+  private String surname;
+  private String nickname;
+  private String location;
   private String bio;
   private String email;
-  private int avatar;
+  private Uri avatar;
   
   public Profile(Context C) {
     this.context = C;
@@ -33,9 +37,12 @@ public class Profile {
     try {
       this.profileJSON = new JSONObject(loadJSONFromFile());
       this.name = profileJSON.getString("name");
+      this.surname = profileJSON.getString("surname");
+      this.nickname = profileJSON.getString("nickname");
+      this.location = profileJSON.getString("location");
       this.bio = profileJSON.getString("bio");
       this.email = profileJSON.getString("email");
-      this.avatar = profileJSON.getInt("avatar");
+      this.avatar = Uri.parse(profileJSON.getString("avatar"));
     } catch (JSONException e) {
       e.printStackTrace();
     }
@@ -52,6 +59,45 @@ public class Profile {
       JE.printStackTrace();
     }
     this.name = newName;
+  }
+  
+  public String getSurname() {
+    return surname;
+  }
+  
+  public void setSurname(String newSurname) {
+    try {
+      profileJSON.put("surname", newSurname);
+    } catch (JSONException JE) {
+      JE.printStackTrace();
+    }
+    this.surname = newSurname;
+  }
+  
+  public String getNickname() {
+    return nickname;
+  }
+  
+  public void setNickname(String newNickname) {
+    try {
+      profileJSON.put("nickname", newNickname);
+    } catch (JSONException JE) {
+      JE.printStackTrace();
+    }
+    this.nickname = newNickname;
+  }
+  
+  public String getLocation() {
+    return location;
+  }
+  
+  public void setLocation(String newLocation) {
+    try {
+      profileJSON.put("location", newLocation);
+    } catch (JSONException JE) {
+      JE.printStackTrace();
+    }
+    this.location = newLocation;
   }
   
   public String getBio() {
@@ -80,13 +126,13 @@ public class Profile {
     this.email = newEmail;
   }
   
-  public int getAvatar() {
+  public Uri getAvatar() {
     return avatar;
   }
   
-  public void setAvatar(int newAvatar) {
+  public void setAvatar(Uri newAvatar) {
     try {
-      profileJSON.put("avatar", newAvatar);
+      profileJSON.put("avatar", newAvatar.toString());
     } catch (JSONException JE) {
       JE.printStackTrace();
     }
@@ -101,7 +147,10 @@ public class Profile {
       J.put("name", "Default_Name");
       J.put("bio", "Default_Bio");
       J.put("email", "Default_Email");
-      J.put("avatar", R.mipmap.ic_launcher_round);
+      J.put("surname", "Default_Surname");
+      J.put("nickname", "Default_Nickname");
+      J.put("location", "Default_location");
+      J.put("avatar", null);
       outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
       outputStream.write(J.toString().getBytes());
       outputStream.close();
