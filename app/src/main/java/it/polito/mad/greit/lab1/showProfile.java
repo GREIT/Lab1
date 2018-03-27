@@ -55,7 +55,7 @@ public class showProfile extends AppCompatActivity {
             ActivityCompat.requestPermissions(showProfile.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION);
         }
 
-        profile = Profile.getInstance(getSharedPreferences("storage", MODE_PRIVATE));
+        profile = Profile.getInstance(getApplicationContext());
 
         TextView tv = findViewById(R.id.name);
         tv.setText(profile.getName());

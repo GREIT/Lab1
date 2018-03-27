@@ -31,13 +31,13 @@ public class Profile {
 
     private static Profile instance;
   
-    private static final String __NAME__ = "Mario";
+    /*private static final String __NAME__ = "Mario";
     private static final String __SURNAME__ = "Rossi";
     private static final String __NICKNAME__ = "@mariorossi";
     private static final String __EMAIL__ = "mr@gmail.com";
     private static final String __LOCATION__ = "Turin, Italy";
     private static final String __BIO__ = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis.";
-    
+    */
 
     private Profile(Context C) {
       this.context = C;
@@ -66,160 +66,163 @@ public class Profile {
     public static Profile getInstance(Context c){
         if (instance == null){
             instance = new Profile(c);
-            instance.loadFromDB(sp);
         }
         return instance;
     }
 
+    public String getName() {
+        return this.name;
+    }
 
     public void setName(String newName) {
-    try {
-      profileJSON.put("name", newName);
-    } catch (JSONException JE) {
-      JE.printStackTrace();
-    }
-    this.name = newName;
-  }
-  
-  public String getSurname() {
-    return surname;
-  }
-  
-  public void setSurname(String newSurname) {
-    try {
-      profileJSON.put("surname", newSurname);
-    } catch (JSONException JE) {
-      JE.printStackTrace();
-    }
-    this.surname = newSurname;
-  }
-  
-  public String getNickname() {
-    return nickname;
-  }
-  
-  public void setNickname(String newNickname) {
-    try {
-      profileJSON.put("nickname", newNickname);
-    } catch (JSONException JE) {
-      JE.printStackTrace();
-    }
-    this.nickname = newNickname;
-  }
-  
-  public String getLocation() {
-    return location;
-  }
-  
-  public void setLocation(String newLocation) {
-    try {
-      profileJSON.put("location", newLocation);
-    } catch (JSONException JE) {
-      JE.printStackTrace();
-    }
-    this.location = newLocation;
-  }
-  
-  public String getBio() {
-    return bio;
-  }
-  
-  public void setBio(String newBio) {
-    try {
-      profileJSON.put("bio", newBio);
-    } catch (JSONException JE) {
-      JE.printStackTrace();
-    }
-    this.bio = newBio;
-  }
-  
-  public String getEmail() {
-    return email;
-  }
-  
-  public void setEmail(String newEmail) {
-    try {
-      profileJSON.put("email", newEmail);
-    } catch (JSONException JE) {
-      JE.printStackTrace();
-    }
-    this.email = newEmail;
-  }
-  
-  public Uri getPic() {
-    return pic;
-  }
-
-     public void setPic(Uri newAvatar) {
-    try {
-      profileJSON.put("pic", newAvatar.toString());
-    } catch (JSONException JE) {
-      JE.printStackTrace();
-    }
-    this.pic = newAvatar;
-  }
-  
-  public void createDefaultProfileJSON() {
-    FileOutputStream outputStream;
-    
-    try {
-      JSONObject J = new JSONObject();
-      J.put("name", "Default_Name");
-      J.put("bio", "Default_Bio");
-      J.put("email", "Default_Email");
-      J.put("surname", "Default_Surname");
-      J.put("nickname", "Default_Nickname");
-      J.put("location", "Default_location");
-      J.put("pic", null);
-      outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
-      outputStream.write(J.toString().getBytes());
-      outputStream.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-  
-  public void saveProfileJSONOnFile() {
-    FileOutputStream outputStream;
-    try {
-      outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
-      outputStream.write(profileJSON.toString().getBytes());
-      outputStream.close();
-    } catch (Exception E) {
-      E.printStackTrace();
-    }
-  }
-  
-  private String loadJSONFromFile() {
-    String json = "";
-    
-    try {
-      
-      InputStream inputStream =  context.openFileInput("profile.json");
-      if ( inputStream != null ) {
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        String receiveString = "";
-        StringBuilder stringBuilder = new StringBuilder();
-        
-        while ( (receiveString = bufferedReader.readLine()) != null ) {
-          stringBuilder.append(receiveString);
+        try {
+          profileJSON.put("name", newName);
+        } catch (JSONException JE) {
+          JE.printStackTrace();
         }
-        
-        inputStream.close();
-        json = stringBuilder.toString();
-      }
+        this.name = newName;
     }
-    catch (FileNotFoundException e) {
-      createDefaultProfileJSON();
-      Log.e("login activity", "ProfileJSON not found: " + e.toString());
-    } catch (IOException e) {
-      Log.e("login activity", "Can not read ProfileJSON: " + e.toString());
+  
+    public String getSurname() {
+        return surname;
     }
-    
-    return json;
-  }
+  
+    public void setSurname(String newSurname) {
+        try {
+          profileJSON.put("surname", newSurname);
+        } catch (JSONException JE) {
+          JE.printStackTrace();
+        }
+        this.surname = newSurname;
+    }
+  
+    public String getNickname() {
+        return nickname;
+    }
+  
+    public void setNickname(String newNickname) {
+        try {
+          profileJSON.put("nickname", newNickname);
+        } catch (JSONException JE) {
+          JE.printStackTrace();
+        }
+        this.nickname = newNickname;
+    }
+  
+    public String getLocation() {
+        return location;
+    }
 
 
+    public void setLocation(String newLocation) {
+        try {
+            profileJSON.put("location", newLocation);
+        } catch (JSONException JE) {
+            JE.printStackTrace();
+        }
+        this.location = newLocation;
     }
+
+    public String getBio() {
+        return bio;
+    }
+  
+    public void setBio(String newBio) {
+        try {
+          profileJSON.put("bio", newBio);
+        } catch (JSONException JE) {
+          JE.printStackTrace();
+        }
+        this.bio = newBio;
+    }
+  
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String newEmail) {
+        try {
+          profileJSON.put("email", newEmail);
+        } catch (JSONException JE) {
+          JE.printStackTrace();
+        }
+        this.email = newEmail;
+    }
+  
+    public Uri getPic() {
+        return pic;
+    }
+
+    public void setPic(Uri newAvatar) {
+        try {
+          profileJSON.put("pic", newAvatar.toString());
+        } catch (JSONException JE) {
+          JE.printStackTrace();
+        }
+        this.pic = newAvatar;
+    }
+
+    public void createDefaultProfileJSON() {
+
+        FileOutputStream outputStream;
+
+        try {
+          JSONObject J = new JSONObject();
+          J.put("name", "Default_Name");
+          J.put("bio", "Default_Bio");
+          J.put("email", "Default_Email");
+          J.put("surname", "Default_Surname");
+          J.put("nickname", "Default_Nickname");
+          J.put("location", "Default_location");
+          J.put("pic", null);
+          outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
+          outputStream.write(J.toString().getBytes());
+          outputStream.close();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+    }
+
+    public void saveProfileJSONOnFile() {
+        FileOutputStream outputStream;
+        try {
+          outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
+          outputStream.write(profileJSON.toString().getBytes());
+          outputStream.close();
+        } catch (Exception E) {
+          E.printStackTrace();
+        }
+    }
+  
+    private String loadJSONFromFile() {
+        String json = "";
+
+        try {
+
+          InputStream inputStream =  context.openFileInput("profile.json");
+          if ( inputStream != null ) {
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String receiveString = "";
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while ( (receiveString = bufferedReader.readLine()) != null ) {
+              stringBuilder.append(receiveString);
+            }
+
+            inputStream.close();
+            json = stringBuilder.toString();
+          }
+        }
+        catch (FileNotFoundException e) {
+          createDefaultProfileJSON();
+          Log.e("login activity", "ProfileJSON not found: " + e.toString());
+        } catch (IOException e) {
+          Log.e("login activity", "Can not read ProfileJSON: " + e.toString());
+        }
+
+        return json;
+    }
+
+
 }

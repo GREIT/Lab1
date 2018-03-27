@@ -77,7 +77,7 @@ public class editProfile extends AppCompatActivity {
 
 
     void Setup(){
-        profile = Profile.getInstance(getSharedPreferences("storage",MODE_PRIVATE));
+        profile = Profile.getInstance(getApplicationContext());
     }
 
     void Fill(){
@@ -110,7 +110,7 @@ public class editProfile extends AppCompatActivity {
         profile.setBio(tv.getText().toString());
 
         try {
-            profile.commit( getSharedPreferences("storage",MODE_PRIVATE));
+            profile.saveProfileJSONOnFile();
             Intent swap = new Intent(editProfile.this, showProfile.class);
             swap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(swap);
