@@ -65,7 +65,7 @@ public class editProfile extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (R.id.edit == item.getItemId()) {
+        if (R.id.confirm == item.getItemId()) {
             SaveInfo();
             return true;
         } else return super.onOptionsItemSelected(item);
