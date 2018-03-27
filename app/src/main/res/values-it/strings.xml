@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lab1</string>
-    <string name="name">Name</string>
-    <string name="surname">Surname</string>
+    <string name="app_name">Lab1Italiano</string>
+    <string name="name">Nome</string>
+    <string name="surname">Cognome</string>
     <string name="email" translatable="false">Email</string>
     <string name="nickname" translatable="false">Nickname</string>
-    <string name="location">Location</string>
-    <string name="bio">A short bio</string>
+    <string name="location">Indirizzo</string>
+    <string name="bio">Una piccola bio</string>
     <string name="bio_sample" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis.</string>
 
 </resources>

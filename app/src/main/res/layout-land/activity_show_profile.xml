@@ -57,7 +57,7 @@
                         android:layout_gravity="top"
                         android:contentDescription="Name"
                         android:gravity="center"
-                        android:text="Mario"
+                        android:text="@string/name"
                         android:textColor="@color/colorPrimaryTitle"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
@@ -69,7 +69,7 @@
                         android:layout_gravity="top"
                         android:contentDescription="Surname"
                         android:gravity="center"
-                        android:text="Rossi"
+                        android:text="@string/surname"
                         android:textColor="@color/colorPrimaryTitle"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/nickname"
-                    android:text="\@mariorossi"
+                    android:text="@string/nickname"
                     android:textColor="@color/colorSecondaryTitle"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
             </LinearLayout>
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:contentDescription="Email"
-                        android:text="mario@rossi.com"
+                        android:text="@string/email"
                         android:textColor="@color/colorPrimaryText"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
                 </LinearLayout>
@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:contentDescription="Location"
-                        android:text="Turin, Italy"
+                        android:text="@string/location"
                         android:textColor="@color/colorPrimaryText"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
@@ -166,8 +166,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:contentDescription="Location"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis."
+                        android:contentDescription="Bio"
+                        android:text="@string/bio"
                         android:textColor="@color/colorPrimaryText"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
