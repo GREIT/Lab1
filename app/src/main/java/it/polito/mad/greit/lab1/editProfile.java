@@ -51,8 +51,8 @@ public class editProfile extends AppCompatActivity {
         bb.setOnClickListener(view -> RevertInfo());
         bb = findViewById(R.id.edit_pic);
         bb.setOnClickListener(view -> UploadPic());
-/*        bb = findViewById(R.id.snap_pic);
-        bb.setOnClickListener(view -> Camera());*/
+        bb = findViewById(R.id.snap_pic);
+        bb.setOnClickListener(view -> Camera());
     }
 
     @Override
@@ -81,8 +81,14 @@ public class editProfile extends AppCompatActivity {
         tv.setText(profile.getName());
         tv = findViewById(R.id.edit_surname);
         tv.setText(profile.getSurname());
+        tv = findViewById(R.id.edit_nickname);
+        tv.setText(profile.getNickname());
         tv = findViewById(R.id.edit_email);
         tv.setText(profile.getEmail());
+        tv = findViewById(R.id.edit_location);
+        tv.setText(profile.getLocation());
+        tv = findViewById(R.id.edit_biography);
+        tv.setText(profile.getBio());
     }
 
     void SaveInfo(){
@@ -90,8 +96,14 @@ public class editProfile extends AppCompatActivity {
         profile.setName(tv.getText().toString());
         tv = findViewById(R.id.edit_surname);
         profile.setSurname(tv.getText().toString());
+        tv = findViewById(R.id.edit_nickname);
+        profile.setNickname(tv.getText().toString());
         tv = findViewById(R.id.edit_email);
         profile.setEmail(tv.getText().toString());
+        tv = findViewById(R.id.edit_location);
+        profile.setLocation(tv.getText().toString());
+        tv = findViewById(R.id.edit_biography);
+        profile.setBio(tv.getText().toString());
 
         try {
             profile.commit( getSharedPreferences("storage",MODE_PRIVATE));

@@ -61,8 +61,15 @@ public class showProfile extends AppCompatActivity {
         tv.setText(profile.getName());
         tv = findViewById(R.id.surname);
         tv.setText(profile.getSurname());
+        tv = findViewById(R.id.nickname);
+        tv.setText(profile.getNickname());
         tv = findViewById(R.id.email);
         tv.setText(profile.getEmail());
+        tv = findViewById(R.id.location);
+        tv.setText(profile.getLocation());
+        tv = findViewById(R.id.biography);
+        tv.setText(profile.getBio());
+
         if (profile.getPic() != null) {
             ImageView iw = findViewById(R.id.pic);
             iw.setImageURI(profile.getPic());
