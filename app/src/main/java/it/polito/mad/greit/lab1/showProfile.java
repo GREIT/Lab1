@@ -58,9 +58,7 @@ public class showProfile extends AppCompatActivity {
         profile = Profile.getInstance(getApplicationContext());
 
         TextView tv = findViewById(R.id.name);
-        tv.setText(profile.getName());
-        tv = findViewById(R.id.surname);
-        tv.setText(profile.getSurname());
+        tv.setText(profile.getName()+" "+profile.getSurname());
         tv = findViewById(R.id.nickname);
         tv.setText(profile.getNickname());
         tv = findViewById(R.id.email);
