@@ -7,5 +7,7 @@
     <string name="location">Location</string>
     <string name="bio">A short bio</string>
     <string name="bio_sample" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis.</string>
-
+    <string name="upload"> Upload </string>
+    <string name="camera"> Camera </string>
+    <string name="cancel"> Cancel </string>
 </resources>

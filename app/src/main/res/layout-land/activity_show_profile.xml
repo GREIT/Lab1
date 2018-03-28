@@ -16,7 +16,7 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="#FFFFFF"/>
+        app:titleTextColor="#FFFFFF" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,10 +26,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:background="@color/colorPrimary"
             android:gravity="bottom"
-            android:padding="30dp"
-            android:background="@color/colorPrimary">
+            android:orientation="vertical"
+            android:padding="30dp">
 
             <ImageView
                 android:id="@+id/pic"
@@ -42,7 +42,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -53,35 +53,35 @@
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
                         android:layout_gravity="top"
+                        android:layout_marginRight="5dp"
                         android:contentDescription="Name"
                         android:gravity="center"
                         android:text="@string/name"
-                        android:textColor="@color/colorPrimaryTitle"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@color/colorPrimaryTitle" />
 
                     <TextView
                         android:id="@+id/surname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
                         android:layout_gravity="top"
+                        android:layout_marginRight="5dp"
                         android:contentDescription="Surname"
                         android:gravity="center"
                         android:text="@string/surname"
-                        android:textColor="@color/colorPrimaryTitle"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@color/colorPrimaryTitle" />
 
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/nickname"
                     android:text="@string/nickname"
-                    android:textColor="@color/colorSecondaryTitle"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/colorSecondaryTitle" />
             </LinearLayout>
         </LinearLayout>
 
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="30dp" >
+                android:padding="30dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,10 +105,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_email_black_24dp"
-                        android:tint="@color/colorPrimaryDark"
                         android:layout_gravity="top"
-                        android:layout_marginRight="40dp"/>
+                        android:layout_marginRight="40dp"
+                        android:src="@drawable/ic_email_black_24dp"
+                        android:tint="@color/colorPrimaryDark" />
 
                     <TextView
                         android:id="@+id/email"
@@ -117,8 +117,8 @@
                         android:layout_gravity="center_vertical"
                         android:contentDescription="Email"
                         android:text="@string/email"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorPrimaryText" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -130,10 +130,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_place_black_24dp"
-                        android:tint="@color/colorPrimaryDark"
                         android:layout_gravity="top"
-                        android:layout_marginRight="40dp"/>
+                        android:layout_marginRight="40dp"
+                        android:src="@drawable/ic_place_black_24dp"
+                        android:tint="@color/colorPrimaryDark" />
 
                     <TextView
                         android:id="@+id/location"
@@ -142,8 +142,8 @@
                         android:layout_gravity="center_vertical"
                         android:contentDescription="Location"
                         android:text="@string/location"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorPrimaryText" />
 
                 </LinearLayout>
 
@@ -156,10 +156,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_description_black_24dp"
-                        android:tint="@color/colorPrimaryDark"
                         android:layout_gravity="top"
-                        android:layout_marginRight="40dp"/>
+                        android:layout_marginRight="40dp"
+                        android:src="@drawable/ic_description_black_24dp"
+                        android:tint="@color/colorPrimaryDark" />
 
                     <TextView
                         android:id="@+id/biography"
@@ -168,8 +168,8 @@
                         android:layout_gravity="center_vertical"
                         android:contentDescription="Bio"
                         android:text="@string/bio"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/colorPrimaryText" />
 
                 </LinearLayout>
 

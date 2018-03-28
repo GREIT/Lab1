@@ -39,7 +39,7 @@
                     android:id="@+id/edit_pic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload Pic"
+                    android:text="@string/upload"
                     android:layout_margin="5dp"
                     />
 
@@ -47,7 +47,7 @@
                     android:id="@+id/snap_pic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Snap Pic"
+                    android:text="@string/camera"
                     android:layout_margin="5dp"
                     />
             </LinearLayout>
@@ -55,7 +55,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name">
+                android:hint="@string/name">
 
                 <EditText
                     android:id="@+id/edit_name"
@@ -68,7 +68,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Surname">
+                android:hint="@string/surname">
 
                 <EditText
                     android:id="@+id/edit_surname"
@@ -81,7 +81,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nickname">
+                android:hint="@string/nickname">
 
                 <EditText
                     android:id="@+id/edit_nickname"
@@ -94,7 +94,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email">
+                android:hint="@string/email">
 
                 <EditText
                     android:id="@+id/edit_email"
@@ -107,7 +107,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Location">
+                android:hint="@string/location">
 
                 <EditText
                     android:id="@+id/edit_location"
@@ -120,7 +120,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Biography">
+                android:hint="@string/bio">
 
                 <EditText
                     android:id="@+id/edit_biography"
