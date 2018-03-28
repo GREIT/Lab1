@@ -1,10 +1,12 @@
 package it.polito.mad.greit.lab1;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +19,6 @@ import android.widget.TextView;
 
 public class showProfile extends AppCompatActivity {
 
-    final int STORAGE_PERMISSION = 1;
     Toolbar t;
     Profile profile;
 
@@ -52,7 +53,7 @@ public class showProfile extends AppCompatActivity {
     private void Setup() {
 
         if (ContextCompat.checkSelfPermission(showProfile.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(showProfile.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION);
+            ActivityCompat.requestPermissions(showProfile.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.STORAGE_PERMISSION);
         }
 
         profile = Profile.getInstance(getApplicationContext());
@@ -79,8 +80,24 @@ public class showProfile extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (requestCode == STORAGE_PERMISSION && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == Constants.STORAGE_PERMISSION && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("You should grant permissions to storage for the app to work properly")
+                    .setPositiveButton(R.string.ok,new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
 
+    protected void onRestart(){
+        super.onRestart();
+        if (ContextCompat.checkSelfPermission(showProfile.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(showProfile.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.STORAGE_PERMISSION);
         }
     }
 }

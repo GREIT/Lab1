@@ -2,6 +2,7 @@ package it.polito.mad.greit.lab1;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,10 +31,6 @@ import java.io.OutputStream;
 
 
 public class editProfile extends AppCompatActivity {
-
-    static final int CAMERA_PERMISSION = 3;
-    static final int REQUEST_IMAGE_CAPTURE = 2;
-    static final int REQUEST_GALLERY = 1;
 
     Toolbar t;
     Profile profile;
@@ -77,6 +75,9 @@ public class editProfile extends AppCompatActivity {
 
 
     void Setup(){
+        if (ContextCompat.checkSelfPermission(editProfile.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(editProfile.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},Constants.STORAGE_PERMISSION);
+        }
         profile = Profile.getInstance(getApplicationContext());
     }
 
@@ -108,6 +109,7 @@ public class editProfile extends AppCompatActivity {
         profile.setLocation(tv.getText().toString());
         tv = findViewById(R.id.edit_biography);
         profile.setBio(tv.getText().toString());
+        profile.setPic(photo);
 
         try {
             profile.saveProfileJSONOnFile();
@@ -130,41 +132,31 @@ public class editProfile extends AppCompatActivity {
         Intent gallery = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         gallery.setType("image/*");
         gallery.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        //flags = gallery.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        startActivityForResult(gallery,REQUEST_GALLERY);
+        startActivityForResult(gallery,Constants.REQUEST_GALLERY);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.d("mytag", "onActivityResult: resultcode" + resultCode + " Request code " + requestCode);
-        if(data == null){
-            Log.d("mytag", "onActivityResult: NULL");
+        if (requestCode == Constants.REQUEST_GALLERY && resultCode == RESULT_OK) {
+            this.photo = data.getData();
         }
-
-        //getContentResolver().takePersistableUriPermission(data.getData(), flags);
-        if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
-            profile.setPic(data.getData());
-        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            profile.setPic(photo);
-        }
+        //else if (requestCode == Constants.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_CANCELED) {}
 
     }
 
     void Camera(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, Constants.CAMERA_PERMISSION);
         }
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
             File img = File.createTempFile("photo", ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES));
-            //Log.d("mytag", "Camera: Created file " + img.toString());
             if(img != null){
                 photo = FileProvider.getUriForFile(this,"it.polito.mad.greit.lab1",img);
-                //Log.d("mytag", "Camera: Entered file provider " + photo.toString());
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,photo);
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                startActivityForResult(takePictureIntent, Constants.REQUEST_IMAGE_CAPTURE);
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -173,8 +165,15 @@ public class editProfile extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (requestCode == CAMERA_PERMISSION && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == Constants.CAMERA_PERMISSION && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Camera();
+        }
+    }
 
+    protected void onRestart(){
+        super.onRestart();
+        if (ContextCompat.checkSelfPermission(editProfile.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(editProfile.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.STORAGE_PERMISSION);
         }
     }
 }

@@ -11,6 +11,6 @@
     <string name="upload"> Carica </string>
     <string name="camera"> Foto </string>
     <string name="cancel"> Annulla </string>
-
+    <string name="ok"> OK </string>
 
 </resources>
