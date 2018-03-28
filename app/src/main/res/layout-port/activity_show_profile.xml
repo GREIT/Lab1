@@ -70,7 +70,6 @@
                     android:text="Rossi"
                     android:textColor="@color/colorPrimaryTitle"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
-
             </LinearLayout>
 
             <TextView
@@ -144,7 +143,6 @@
                     android:text="Turin, Italy"
                     android:textColor="@color/colorPrimaryText"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -166,14 +164,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:contentDescription="Location"
+                    android:contentDescription="Biography"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus eros, maximus non ipsum ac, luctus ultricies urna. Suspendisse dignissim volutpat sodales. Nullam tincidunt lectus vitae dui finibus, nec egestas neque venenatis."
                     android:textColor="@color/colorPrimaryText"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
