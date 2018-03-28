@@ -42,36 +42,17 @@
             android:orientation="vertical"
             android:layout_gravity="center_vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_gravity="top"
-                    android:contentDescription="Name"
-                    android:gravity="center"
-                    android:text="@string/name"
-                    android:textColor="@color/colorPrimaryTitle"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
-
-                <TextView
-                    android:id="@+id/surname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_gravity="top"
-                    android:contentDescription="Surname"
-                    android:gravity="center"
-                    android:text="@string/surname"
-                    android:textColor="@color/colorPrimaryTitle"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
-
-            </LinearLayout>
+                android:layout_gravity="top"
+                android:contentDescription="Name"
+                android:text="Mario Rossi"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/colorPrimaryTitle"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -144,7 +125,6 @@
                     android:text="@string/location"
                     android:textColor="@color/colorPrimaryText"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -166,14 +146,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:contentDescription="Location"
-                    android:text="@string/bio"
+
+                    android:contentDescription="Biography"
+                    android:text="@string/bio_sample"
                     android:textColor="@color/colorPrimaryText"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
