@@ -20,7 +20,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class Profile {
 
     private Context context;
-    private JSONObject profileJSON;
+    private static Profile instance;
+
     private String name;
     private String surname;
     private String nickname;
@@ -29,8 +30,6 @@ public class Profile {
     private String email;
     private Uri pic;
 
-    private static Profile instance;
-  
     private static final String __NAME__ = "Mario";
     private static final String __SURNAME__ = "Rossi";
     private static final String __NICKNAME__ = "@mariorossi";
@@ -40,20 +39,24 @@ public class Profile {
 
 
     private Profile(Context C) {
-      this.context = C;
+        this.context = C;
 
-      try {
-          this.profileJSON = new JSONObject(loadJSONFromFile());
-          this.name = profileJSON.getString("name");
-          this.surname = profileJSON.getString("surname");
-          this.nickname = profileJSON.getString("nickname");
-          this.location = profileJSON.getString("location");
-          this.bio = profileJSON.getString("bio");
-          this.email = profileJSON.getString("email");
-          this.pic = Uri.parse(profileJSON.getString("pic"));
-      } catch (JSONException e) {
-          e.printStackTrace();
-      }
+        String profileJSON = loadJSONFromFile();
+        if (profileJSON != null) {
+            try {
+                JSONObject profile = new JSONObject(profileJSON);
+                setName(profile.getString("name"));
+                setSurname(profile.getString("surname"));
+                setNickname(profile.getString("nickname"));
+                setEmail(profile.getString("email"));
+                setLocation(profile.getString("location"));
+                setBio(profile.getString("bio"));
+                setPic(Uri.parse(profile.getString("pic")));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static Profile getInstance(){
@@ -70,123 +73,51 @@ public class Profile {
         return instance;
     }
 
-    public String getName() {
-        return this.name;
-    }
+    public String getName() { return this.name; }
+    public void setName(String newName) { this.name = newName; }
 
-    public void setName(String newName) {
-        try {
-            profileJSON.put("name", newName);
-        } catch (JSONException JE) {
-            JE.printStackTrace();
-        }
-        this.name = newName;
-    }
-  
-    public String getSurname() {
-        return surname;
-    }
-  
-    public void setSurname(String newSurname) {
-        try {
-            profileJSON.put("surname", newSurname);
-        } catch (JSONException JE) {
-            JE.printStackTrace();
-        }
-        this.surname = newSurname;
-    }
-  
-    public String getNickname() {
-        return nickname;
-    }
-  
-    public void setNickname(String newNickname) {
-        try {
-            profileJSON.put("nickname", newNickname);
-        } catch (JSONException JE) {
-            JE.printStackTrace();
-        }
-        this.nickname = newNickname;
-    }
-  
-    public String getLocation() {
-        return location;
-    }
+    public String getSurname() { return surname; }
+    public void setSurname(String newSurname) { this.surname = newSurname; }
+
+    public String getNickname() { return nickname; }
+    public void setNickname(String newNickname) { this.nickname = newNickname; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String newEmail) { this.email = newEmail; }
+
+    public String getLocation() { return location; }
+    public void setLocation(String newLocation) { this.location = newLocation; }
+
+    public String getBio() { return bio; }
+    public void setBio(String newBio) { this.bio = newBio; }
+
+    public Uri getPic() { return pic; }
+    public void setPic(Uri newAvatar) { this.pic = newAvatar; }
 
 
-    public void setLocation(String newLocation) {
-        try {
-            profileJSON.put("location", newLocation);
-        } catch (JSONException JE) {
-            JE.printStackTrace();
-        }
-        this.location = newLocation;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-  
-    public void setBio(String newBio) {
-        try {
-            profileJSON.put("bio", newBio);
-        } catch (JSONException JE) {
-            JE.printStackTrace();
-        }
-        this.bio = newBio;
-    }
-  
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String newEmail) {
-        try {
-            profileJSON.put("email", newEmail);
-        } catch (JSONException JE) {
-            JE.printStackTrace();
-        }
-        this.email = newEmail;
-    }
-  
-    public Uri getPic() {
-        return pic;
-    }
-
-    public void setPic(Uri newAvatar) {
-        try {
-            profileJSON.put("pic", newAvatar.toString());
-        } catch (JSONException JE) {
-            JE.printStackTrace();
-        }
-        this.pic = newAvatar;
-    }
-
-    private void createDefaultProfileJSON() {
-        FileOutputStream outputStream;
-
-        try {
-            JSONObject J = new JSONObject();
-            J.put("name", __NAME__);
-            J.put("surname", __SURNAME__);
-            J.put("nickname", __NICKNAME__);
-            J.put("email", __EMAIL__);
-            J.put("location", __LOCATION__);
-            J.put("bio", __BIO__);
-            J.put("pic", null);
-
-            outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
-            outputStream.write(J.toString().getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void createDefaultProfile() {
+        this.setName(__NAME__);
+        this.setSurname(__SURNAME__);
+        this.setNickname(__NICKNAME__);
+        this.setEmail(__EMAIL__);
+        this.setLocation(__LOCATION__);
+        this.setBio(__BIO__);
+        this.setPic(null);
     }
 
     public void saveProfileJSONOnFile() {
         FileOutputStream outputStream;
 
         try {
+            JSONObject profileJSON = new JSONObject();
+            profileJSON.put("name", getName());
+            profileJSON.put("surname", getSurname());
+            profileJSON.put("nickname", getNickname());
+            profileJSON.put("email", getEmail());
+            profileJSON.put("location", getLocation());
+            profileJSON.put("bio", getBio());
+            profileJSON.put("pic", getPic());
+
             outputStream = context.openFileOutput("profile.json", MODE_PRIVATE);
             outputStream.write(profileJSON.toString().getBytes());
             outputStream.close();
@@ -194,9 +125,9 @@ public class Profile {
             E.printStackTrace();
         }
     }
-  
+
     private String loadJSONFromFile() {
-        String json = "";
+        String json = null;
 
         try {
             InputStream inputStream =  context.openFileInput("profile.json");
@@ -215,7 +146,7 @@ public class Profile {
             }
         }
         catch (FileNotFoundException e) {
-            createDefaultProfileJSON();
+            createDefaultProfile();
             Log.e("login activity", "ProfileJSON not found: " + e.toString());
         } catch (IOException e) {
             Log.e("login activity", "Can not read ProfileJSON: " + e.toString());

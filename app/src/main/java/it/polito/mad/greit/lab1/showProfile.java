@@ -73,7 +73,6 @@ public class showProfile extends AppCompatActivity {
         if (profile.getPic() != null) {
             ImageView iw = findViewById(R.id.pic);
             iw.setImageURI(profile.getPic());
-            //Log.d("pic", "Setup: pic isn't null");
         } else {
             ImageView iw = findViewById(R.id.pic);
             iw.setImageResource(R.mipmap.ic_launcher);
